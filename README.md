@@ -13,7 +13,11 @@ Furthermore, due to modulo math being hypothesized as natural math they become r
 &emsp;0 * 0 = ??? ; this results in an infinite loop<br />
 This is so because the 0 value in modulo math is essentially ∞. Thus, ∞ * ∞ is take infinite loops around infinity.
 The author has chosen 0 * 0 to be a RNG as he has conceptualised asking a value is like taking a screenshot of 0 * 0.
-* Division by 0 is 0. This just follows the logical conclusion of 0 * 0 being any and all numbers.
+* 0 / 0 is also a RNG. As,<br />
+&emsp;0 / 0 = x<br />
+&emsp;x * 0 = 0<br />
+So x can also be any and all numbers.
+* Division by 0 when the numerator isn't 0 is 0. This just follows the logical conclusion of 0 * 0 being any and all numbers.
 
 The aim of this project is: firstly, to experiment with these rules to find interesting insights, 
 and secondly, to rebuild math upon these rules. Any contributions are welcome.
