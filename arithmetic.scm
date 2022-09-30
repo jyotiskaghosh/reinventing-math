@@ -1,8 +1,7 @@
 (define (accumulate op initial sequence)
 	(if (null? sequence)
 		initial
-		(op (car sequence)
-		(accumulate op initial (cdr sequence)))))
+		(op (accumulate op initial (cdr sequence)) (car sequence))))
 
 (define (check-args? x y mod) 
 	(define (valid? n mod) (and (integer? n) (>= n 0) (< n mod)))
@@ -19,7 +18,7 @@
 			(let ((sum (+ x y))) (if (>= sum mod) (- sum mod) sum))
 			(error invalid-args)))
 	(if (valid-mod? mod) 
-		(lambda (x y . z) (add (add x y) (accumulate add 0 z)))
+		(lambda (x y . numbers) (accumulate add (add x y) numbers))
 		(error Invalid-mod)))
 	
 (define (subtraction mod)
@@ -28,7 +27,7 @@
 			(let ((dif (- x y))) (if (< dif 0) (+ dif mod) dif))
 			(error invalid-args)))
 	(if (valid-mod? mod)
-		(lambda (x y . z) (sub (sub x y) (accumulate sub 0 z)))
+		(lambda (x y . numbers) (accumulate sub (sub x y) numbers))
 		(error Invalid-mod)))
 
 (define (multiplication mod)
@@ -38,7 +37,7 @@
 		(if (not (check-args? x y mod)) (error invalid-args)
 			(mul x y)))
 	(if (valid-mod? mod) 
-		(lambda (x y . z) (mul (mul x y) (accumulate mul 1 z)))
+		(lambda (x y . numbers) (accumulate mul (mul x y) numbers))
 		(error Invalid-mod)))
 
 (define (division mod)
@@ -49,5 +48,5 @@
 			  ((and (= x 0) (= y 0)) (random mod))
 			  (else (div x y))))
 	(if (valid-mod? mod)
-		(lambda (x y . z) (div (div x y) (accumulate div 1 z)))
+		(lambda (x y . numbers) (accumulate div (div x y) numbers))
 		(error Invalid-mod)))
