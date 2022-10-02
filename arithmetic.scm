@@ -3,11 +3,10 @@
 		initial
 		(op (accumulate op initial (cdr sequence)) (car sequence))))
 
-(define (check-args? x y mod) 
-	(define (valid? n mod) (and (integer? n) (> n 0) (<= n mod)))
-	(and (valid? x mod) (valid? y mod)))
+(define (valid? x) (and (integer? x) (> x 0)))
 
-(define (valid-mod? mod) (and (integer? mod) (> mod 0)))
+(define (check-args? x y mod) 
+	(and (valid? x) (valid? y) (valid? mod) (>= mod x) (>= mod y)))
 
 (define invalid-args "Invalid arguments")
 (define invalid-mod "Invalid modulo")
@@ -17,7 +16,7 @@
 		(if (check-args? x y mod) 
 			(let ((sum (+ x y))) (if (> sum mod) (- sum mod) sum))
 			(error invalid-args)))
-	(if (valid-mod? mod) 
+	(if (valid? mod) 
 		(lambda (x y . numbers) (accumulate add (add x y) numbers))
 		(error Invalid-mod)))
 
@@ -26,7 +25,7 @@
 		(if (check-args? x y mod) 
 			(let ((dif (- x y))) (if (<= dif 0) (+ dif mod) dif))
 			(error invalid-args)))
-	(if (valid-mod? mod)
+	(if (valid? mod)
 		(lambda (x y . numbers) (accumulate sub (sub x y) numbers))
 		(error Invalid-mod)))
 
@@ -37,7 +36,7 @@
 		(if (not (check-args? x y mod)) 
 			(error invalid-args)
 			(mul x y)))
-	(if (valid-mod? mod) 
+	(if (valid? mod) 
 		(lambda (x y . numbers) (accumulate mul (mul x y) numbers))
 		(error Invalid-mod)))
 
@@ -51,6 +50,6 @@
 			((not (check-args? x y mod)) (error invalid-args))
 			((= y mod) (random mod))
 			(else (div x y))))
-	(if (valid-mod? mod)
+	(if (valid? mod)
 		(lambda (x y . numbers) (accumulate div (div x y) numbers))
 		(error Invalid-mod)))
