@@ -33,9 +33,10 @@
 	(define (mul x y)
 		(define (mul x y)
 			(if (= y 0) mod ((addition mod) x (mul x (- y 1)))))
-		(if (not (check-args? x y mod)) 
-			(error invalid-args)
-			(mul x y)))
+		(cond
+			((not (check-args? x y mod)) (error invalid-args))
+			((and (= x mod) (= y mod)) (+ 1 (random mod)))
+			(else (mul x y))))
 	(if (valid? mod) 
 		(lambda (x y . numbers) (accumulate mul (mul x y) numbers))
 		(error Invalid-mod)))
@@ -48,7 +49,7 @@
 				((addition mod) 1 (div (- x y) y))))
 		(cond 
 			((not (check-args? x y mod)) (error invalid-args))
-			((= y mod) (random mod))
+			((= y mod) (+ 1 (random mod)))
 			(else (div x y))))
 	(if (valid? mod)
 		(lambda (x y . numbers) (accumulate div (div x y) numbers))
