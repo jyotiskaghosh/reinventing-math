@@ -7,7 +7,7 @@ Changing some fundamentals of math. The philosophies for the changes are as foll
 * Negative numbers shouldn't exist. Philosophically negative numbers make no sense, as there exists no negative quantities.
 Furthermore, due to modulo math being hypothesized as natural math, they become redundant.
 * Fractions don't exist. Division of x by y is the max number of y that can be subtracted from x. And division further isn't the inverse of multiplication:<br />
-&emsp;x / y = z + remainder<br />
+&emsp;x / y = z => z * y = x - remainder<br />
 * Zero doesn't exist. The modulo value essentially functions as zero.
 * x / mod is a RNG. As,<br />
 &emsp;x / mod = y + r<br />
