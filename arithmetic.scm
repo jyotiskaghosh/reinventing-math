@@ -1,8 +1,3 @@
-(define (accumulate op initial sequence)
-	(if (null? sequence)
-		initial
-		(op (accumulate op initial (cdr sequence)) (car sequence))))
-
 (define (mod x y) (let ((m (modulo x y))) (if (= m 0) y m)))
 
 (define (addition m)
@@ -13,7 +8,7 @@
 				(mod (* (denominator x) (denominator y)) m))))
 	(if (<= m 0) 
 		(error "Negative numbers and 0 are invalid modulo value")
-		(lambda (x y . numbers) (accumulate add (add x y) numbers))))
+		(lambda (x y . numbers) (fold-right add (add x y) numbers))))
 
 (define (multiplication m)
 	(define (mul x y)
@@ -23,4 +18,5 @@
 				(mod (* (denominator x) (denominator y)) m))))
 	(if (<= m 0) 
 		(error "Negative numbers and 0 are invalid modulo value")
-		(lambda (x y . numbers) (accumulate mul (mul x y) numbers))))
+		(lambda (x y . numbers) (fold-right mul (mul x y) numbers))))
+
