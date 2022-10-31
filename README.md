@@ -8,7 +8,7 @@ Changing some fundamentals of math. The philosophies for the changes are as foll
 Furthermore, due to modulo math being hypothesized as natural math, they become redundant.
 Negative numbers cannot be used as mod value, but can be used as arguments to express the mod - x value.
 * Zero doesn't exist. The modulo value essentially functions as zero.
-* Both subtraction and division are unnecessary, as you can use negative numbers and fractions to express them.
+* Only addition is fundamental. Subtraction is redundant as -ve values are accepted.
 
 The aim of this project is: firstly, to experiment with these rules to find interesting insights, 
 and secondly, to rebuild math upon these rules. Any contributions are welcome.
